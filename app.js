@@ -1,8 +1,16 @@
 const express = require("express");
 const app = express();
 
+const logMiddleware = (req, res) => {
+  console.log(`
+    HOST: ${req.headers.host}
+    URL: ${req.url}
+    METHOD: ${req.method}
+  `);
+};
+
 // Modelo de QueryParams
-app.get("/", (req, res) => {
+app.get("/", logMiddleware, (req, res) => {
   console.log(`Bem vindo ${req.query.name}`);
   res.json({
     message: `Bem vindo ${req.query.name}`
